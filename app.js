@@ -8,8 +8,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongojs = require('mongojs');
-const db = mongojs('taskdb',['tasks']);
-// const hobbydb = mongojs('hobbydb',['hobbies']);
+const taskCollection = mongojs('kodb',['tasks']);
+const hobbyCollection = mongojs('kodb',['hobbies']);
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -21,7 +21,7 @@ app.get('/', function(req, res){
 
 /** See all Tasks. */
 app.get('/tasks', function(req, res){
-	db.tasks.find({taskName: 1}, (err, docs) => {
+	taskCollection.tasks.find((err, docs) => {
 		if(err){
 			res.send(err);
 		} else {
@@ -33,7 +33,7 @@ app.get('/tasks', function(req, res){
 
 /** Add a task */
 app.post('/tasks', function(req, res){
-	db.tasks.insert(req.body, (err, doc) => {
+	taskCollection.tasks.insert(req.body, (err, doc) => {
 		if(err){
 			res.send(err);
 		} else {
@@ -45,10 +45,10 @@ app.post('/tasks', function(req, res){
 
 /** Update a task. */
 app.put('/tasks/:id', function(req, res){
-	db.tasks.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
+	taskCollection.tasks.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
 	update:{ $set:{
-		name: req.body.name,
-		type: req.body.type,
+		taskName: req.body.taskName,
+		taskCategory: req.body.taskCategory,
 		deadline: req.body.deadline
 	}},
 	new: true
@@ -64,7 +64,7 @@ app.put('/tasks/:id', function(req, res){
 
 /** Delete a task. */
 app.delete('/tasks/:id', function(req, res){
-	db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+	taskCollection.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
 		if(err){
 			res.send(err);
 		} else {
@@ -78,7 +78,7 @@ app.delete('/tasks/:id', function(req, res){
 
 /** See all Hobbies. */
 app.get('/hobbies', function(req, res){
-	hobbydb.hobbies.find({hobbyName: 1}, (err, docs) => {
+	hobbyCollection.hobbies.find((err, docs) => {
 		if(err){
 			res.send(err);
 		} else {
@@ -90,7 +90,7 @@ app.get('/hobbies', function(req, res){
 
 /** Add a hobby */
 app.post('/hobbies', function(req, res){
-	hobbydb.hobbies.insert(req.body, (err, doc) => {
+	hobbyCollection.hobbies.insert(req.body, (err, doc) => {
 		if(err){
 			res.send(err);
 		} else {
@@ -102,11 +102,11 @@ app.post('/hobbies', function(req, res){
 
 /** Update a hobby. */
 app.put('/hobbies/:id', function(req, res){
-	hobbydb.hobbies.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
+	hobbyCollection.hobbies.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
 	update:{ $set:{
-		name: req.body.name,
-		type: req.body.type,
-		deadline: req.body.deadline
+		hobbyName: req.body.hobbyName,
+		hobbyCategory: req.body.hobbyCategory,
+		frequency: req.body.frequency
 	}},
 	new: true
 	 }, (err, doc) => {
@@ -121,7 +121,7 @@ app.put('/hobbies/:id', function(req, res){
 
 /** Delete a hobby. */
 app.delete('/hobbies/:id', function(req, res){
-	hobbydb.hobbies.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+	hobbyCollection.hobbies.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
 		if(err){
 			res.send(err);
 		} else {

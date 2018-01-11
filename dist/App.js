@@ -1,6 +1,6 @@
 // import TaskViewModel from 'TaskViewModel';
 /**
- * This is a class that a user the ability to create, edit/update, view, and/or delete tasks.
+ * This brings all the ViewModels together.
  */
 let taskViewModel;
 let hobbyViewModel;
