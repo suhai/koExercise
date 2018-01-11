@@ -26,6 +26,45 @@
       </div>
     </nav>
 
+    <h2>INTRO</h2>
+    <div class="container" id="intro">
+    	<div class="row">
+        <p>First name: <strong data-bind="text: firstName"></strong></p>
+        <p>Last name: <strong data-bind="text: lastName"></strong></p>
+        <p>First name: <input data-bind="value: firstName" /></p>
+        <p>Last name: <input data-bind="value: lastName" /></p>
+        <p>Full name: <strong data-bind="text: fullName"></strong></p>
+
+        <button data-bind="click: capitalizeLastName">Go caps</button>
+    	</div> <!-- end of row -->
+      <br>
+
+      <div class="row">
+      	<div class="col-md-12">
+      		<table class="table table-striped">
+      			<thead>
+      				<tr>
+      					<th></th>
+      					<th>Name</th>
+      					<th>Category</th>
+      					<th>Deadline</th>
+      				</tr>
+      			</thead>
+      			<tbody data-bind="foreach: tasks">
+      				<tr>
+      					<td><input data-bind="value: $data, checked: $parent.selectedTasks" type="checkbox"></td>
+      					<td data-bind="text: taskName"></td>
+      					<td data-bind="text: taskCategory"></td>
+      					<td data-bind="text: deadline"></td>
+      				</tr>
+      			</tbody>
+      		</table>
+      	</div>
+      </div> <!-- end of row -->
+    </div> <!-- end of container -->
+    <br>
+    <br>
+
     <h2>TASKS</h2>
     <div class="container" id="tasks">
     	<div class="row">
@@ -122,6 +161,7 @@
   </body>
   <!-- My goal is to eventually bundle all the js files togther as bundle.js -->
   <!-- <script src="bundle.js"></script> -->
+  <script src="Intro.js" ></script>
   <script src="Task.js" ></script>
   <script src="Hobby.js" ></script>
   <script src="app.js" ></script>
