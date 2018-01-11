@@ -7,12 +7,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
   </head>
 
-	<body onload="getTasks()">
+	<body>
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -26,26 +26,28 @@
       </div>
     </nav>
 
-    <div class="container">
+    <h2>TASKS</h2>
+    <div class="container" id="tasks">
     	<div class="row">
     		<div class="col-md-3">
-    			<input data-bind="value: taskInputName,valueUpdate:'keypress'" type="text" id="name" class="form-control" placeholder="Enter Task">
+    			<input data-bind="value: taskInputName, valueUpdate: 'keypress'" type="text" id="taskName" class="form-control" placeholder="Enter Task">
     		</div>
     		<div class="col-md-3">
-    			<select data-bind="value: taskInputCategory, options: categories,optionsCaption: 'Select Category'" id="category" class="form-control">
+    			<select data-bind="value: taskInputCategory, options: taskCategories, optionsCaption: 'Select Category'" id="taskCategory" class="form-control">
     			</select>
     		</div>
     		<div class="col-md-3">
     			<input data-bind="value: taskInputDeadline" type="date" id="deadline" class="form-control">
     		</div>
     		<div class="col-md-3">
-    			<button data-bind="click: addTask, enable: taskInputName, visible: !updatable()" class="btn btn-primary">Add</button>
-    			<button data-bind="click: updateTask, enable: taskInputName,visible: updatable" class="btn btn-primary">Update</button>
-    			<button data-bind="click: editSelected, enable: editable" class="btn btn-info">Edit</button>
-    			<button data-bind="click: deleteSelected, enable: editable" class="btn btn-danger">Delete</button>
+    			<button data-bind="click: addTask, enable: taskInputName, visible: !updatableTask()" class="btn btn-primary">Add</button>
+    			<button data-bind="click: updateTask, enable: taskInputName, visible: updatableTask" class="btn btn-primary">Update</button>
+    			<button data-bind="click: editSelectedTask, enable: editableTask" class="btn btn-info">Edit</button>
+    			<button data-bind="click: deleteSelectedTask, enable: editableTask" class="btn btn-danger">Delete</button>
     		</div>
     	</div> <!-- end of row -->
-    	<br><br>
+      <br>
+
       <div class="row">
       	<div class="col-md-12">
       		<table class="table table-striped">
@@ -60,9 +62,57 @@
       			<tbody data-bind="foreach: tasks">
       				<tr>
       					<td><input data-bind="value: $data, checked: $parent.selectedTasks" type="checkbox"></td>
-      					<td data-bind="text: name"></td>
-      					<td data-bind="text: category"></td>
+      					<td data-bind="text: taskName"></td>
+      					<td data-bind="text: taskCategory"></td>
       					<td data-bind="text: deadline"></td>
+      				</tr>
+      			</tbody>
+      		</table>
+      	</div>
+      </div> <!-- end of row -->
+    </div> <!-- end of container -->
+    <br>
+    <br>
+
+    <h2>HOBBIES</h2>
+    <div class="container" id="hobbies">
+    	<div class="row">
+    		<div class="col-md-3">
+    			<input data-bind="value: hobbyInputName, valueUpdate: 'keypress'" type="text" id="hobbyName" class="form-control" placeholder="Enter Hobby">
+    		</div>
+    		<div class="col-md-3">
+          <select data-bind="value: hobbyInputCategory, options: hobbyCategories, optionsCaption: 'Select Category'" id="hobbyCategory" class="form-control">
+          </select>
+    		</div>
+    		<div class="col-md-3">
+    			<input data-bind="value: hobbyInputFrequency" type="number" id="frequency" class="form-control">
+    		</div>
+    		<div class="col-md-3">
+    			<button data-bind="click: addHobby, enable: hobbyInputName, visible: !updatableHobby()" class="btn btn-primary">Add</button>
+    			<button data-bind="click: updateHobby, enable: hobbyInputName,visible: updatableHobby" class="btn btn-primary">Update</button>
+    			<button data-bind="click: editSelectedHobby, enable: editableHobby" class="btn btn-info">Edit</button>
+    			<button data-bind="click: deleteSelectedHobby, enable: editableHobby" class="btn btn-danger">Delete</button>
+    		</div>
+    	</div> <!-- end of row -->
+      <br>
+
+      <div class="row">
+      	<div class="col-md-12">
+      		<table class="table table-striped">
+      			<thead>
+      				<tr>
+      					<th></th>
+      					<th>Name</th>
+      					<th>Category</th>
+      					<th>Frequency</th>
+      				</tr>
+      			</thead>
+      			<tbody data-bind="foreach: hobbies">
+      				<tr>
+      					<td><input data-bind="value: $data, checked: $parent.selectedHobbies" type="checkbox"></td>
+      					<td data-bind="text: hobbyName"></td>
+      					<td data-bind="text: hobbyCategory"></td>
+      					<td data-bind="text: frequency"></td>
       				</tr>
       			</tbody>
       		</table>
@@ -71,5 +121,7 @@
     </div> <!-- end of container -->
   </body>
   <!-- <script src="bundle.js"></script> -->
+  <script src="Task.js" ></script>
+  <script src="Hobby.js" ></script>
   <script src="App.js" ></script>
 </html>

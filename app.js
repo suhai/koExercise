@@ -8,7 +8,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongojs = require('mongojs');
-const db = mongojs('koexercise',['tasks']);
+const db = mongojs('koexercise',['tasks', 'hobbies']);
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -30,6 +30,18 @@ app.get('/tasks', function(req, res){
 	});
 });
 
+/** See all Hobbies. */
+app.get('/hobbies', function(req, res){
+	db.tasks.find((err, docs) => {
+		if(err){
+			res.send(err);
+		} else {
+			console.log('Getting Hobbies...');
+			res.json(docs);
+		}
+	});
+});
+
 /** Add a task */
 app.post('/tasks', function(req, res){
 	db.tasks.insert(req.body, (err, doc) => {
@@ -42,7 +54,19 @@ app.post('/tasks', function(req, res){
 	});
 });
 
-/** Update a task.. */
+/** Add a hobby */
+app.post('/hobbies', function(req, res){
+	db.tasks.insert(req.body, (err, doc) => {
+		if(err){
+			res.send(err);
+		} else {
+			console.log('Adding Hobby...');
+			res.json(doc);
+		}
+	});
+});
+
+/** Update a task. */
 app.put('/tasks/:id', function(req, res){
 	db.tasks.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
 	update:{ $set:{
@@ -61,6 +85,25 @@ app.put('/tasks/:id', function(req, res){
 	});
 });
 
+/** Update a hobby. */
+app.put('/hobbies/:id', function(req, res){
+	db.tasks.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
+	update:{ $set:{
+		name: req.body.name,
+		type: req.body.type,
+		deadline: req.body.deadline
+	}},
+	new: true
+	 }, (err, doc) => {
+		if(err){
+			res.send(err);
+		} else {
+			console.log('Updating Hobby...');
+			res.json(doc);
+		}
+	});
+});
+
 /** Delete a task. */
 app.delete('/tasks/:id', function(req, res){
 	db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
@@ -68,6 +111,18 @@ app.delete('/tasks/:id', function(req, res){
 			res.send(err);
 		} else {
 			console.log('Removing Task...');
+			res.json(doc);
+		}
+	});
+});
+
+/** Delete a hobby. */
+app.delete('/hobbies/:id', function(req, res){
+	db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+		if(err){
+			res.send(err);
+		} else {
+			console.log('Removing Hobby...');
 			res.json(doc);
 		}
 	});
