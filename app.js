@@ -8,7 +8,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongojs = require('mongojs');
-const db = mongojs('koexercise',['tasks', 'hobbies']);
+const db = mongojs('taskdb',['tasks']);
+// const hobbydb = mongojs('hobbydb',['hobbies']);
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -20,23 +21,11 @@ app.get('/', function(req, res){
 
 /** See all Tasks. */
 app.get('/tasks', function(req, res){
-	db.tasks.find((err, docs) => {
+	db.tasks.find({taskName: 1}, (err, docs) => {
 		if(err){
 			res.send(err);
 		} else {
 			console.log('Getting Tasks...');
-			res.json(docs);
-		}
-	});
-});
-
-/** See all Hobbies. */
-app.get('/hobbies', function(req, res){
-	db.tasks.find((err, docs) => {
-		if(err){
-			res.send(err);
-		} else {
-			console.log('Getting Hobbies...');
 			res.json(docs);
 		}
 	});
@@ -49,18 +38,6 @@ app.post('/tasks', function(req, res){
 			res.send(err);
 		} else {
 			console.log('Adding Task...');
-			res.json(doc);
-		}
-	});
-});
-
-/** Add a hobby */
-app.post('/hobbies', function(req, res){
-	db.tasks.insert(req.body, (err, doc) => {
-		if(err){
-			res.send(err);
-		} else {
-			console.log('Adding Hobby...');
 			res.json(doc);
 		}
 	});
@@ -85,9 +62,47 @@ app.put('/tasks/:id', function(req, res){
 	});
 });
 
+/** Delete a task. */
+app.delete('/tasks/:id', function(req, res){
+	db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+		if(err){
+			res.send(err);
+		} else {
+			console.log('Removing Task...');
+			res.json(doc);
+		}
+	});
+});
+
+
+
+/** See all Hobbies. */
+app.get('/hobbies', function(req, res){
+	hobbydb.hobbies.find({hobbyName: 1}, (err, docs) => {
+		if(err){
+			res.send(err);
+		} else {
+			console.log('Getting Hobbies...');
+			res.json(docs);
+		}
+	});
+});
+
+/** Add a hobby */
+app.post('/hobbies', function(req, res){
+	hobbydb.hobbies.insert(req.body, (err, doc) => {
+		if(err){
+			res.send(err);
+		} else {
+			console.log('Adding Hobby...');
+			res.json(doc);
+		}
+	});
+});
+
 /** Update a hobby. */
 app.put('/hobbies/:id', function(req, res){
-	db.tasks.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
+	hobbydb.hobbies.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)},
 	update:{ $set:{
 		name: req.body.name,
 		type: req.body.type,
@@ -104,21 +119,9 @@ app.put('/hobbies/:id', function(req, res){
 	});
 });
 
-/** Delete a task. */
-app.delete('/tasks/:id', function(req, res){
-	db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
-		if(err){
-			res.send(err);
-		} else {
-			console.log('Removing Task...');
-			res.json(doc);
-		}
-	});
-});
-
 /** Delete a hobby. */
 app.delete('/hobbies/:id', function(req, res){
-	db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+	hobbydb.hobbies.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
 		if(err){
 			res.send(err);
 		} else {
