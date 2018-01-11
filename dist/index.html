@@ -29,39 +29,16 @@
     <h2>INTRO</h2>
     <div class="container" id="intro">
     	<div class="row">
-        <p>First name: <strong data-bind="text: firstName"></strong></p>
-        <p>Last name: <strong data-bind="text: lastName"></strong></p>
-        <p>First name: <input data-bind="value: firstName" /></p>
-        <p>Last name: <input data-bind="value: lastName" /></p>
-        <p>Full name: <strong data-bind="text: fullName"></strong></p>
+        <p>First Name: <strong data-bind="text: firstName"></strong></p>
+        <p>Last Name: <strong data-bind="text: lastName"></strong></p>
+        <p>First Name: <input data-bind="value: firstName" /></p>
+        <p>Last Name: <input data-bind="value: lastName" /></p>
+        <p>Full Name: <strong data-bind="text: fullName"></strong></p>
 
-        <button data-bind="click: capitalizeLastName">Go caps</button>
-    	</div> <!-- end of row -->
-      <br>
-
-      <div class="row">
-      	<div class="col-md-12">
-      		<table class="table table-striped">
-      			<thead>
-      				<tr>
-      					<th></th>
-      					<th>Name</th>
-      					<th>Category</th>
-      					<th>Deadline</th>
-      				</tr>
-      			</thead>
-      			<tbody data-bind="foreach: tasks">
-      				<tr>
-      					<td><input data-bind="value: $data, checked: $parent.selectedTasks" type="checkbox"></td>
-      					<td data-bind="text: taskName"></td>
-      					<td data-bind="text: taskCategory"></td>
-      					<td data-bind="text: deadline"></td>
-      				</tr>
-      			</tbody>
-      		</table>
-      	</div>
+        <button data-bind="click: capitalizeLastName" class="btn btn-success">Go caps</button>
       </div> <!-- end of row -->
     </div> <!-- end of container -->
+    <hr>
     <br>
     <br>
 
@@ -110,6 +87,7 @@
       	</div>
       </div> <!-- end of row -->
     </div> <!-- end of container -->
+    <hr>
     <br>
     <br>
 
