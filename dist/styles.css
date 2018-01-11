@@ -6,3 +6,12 @@ h2 {
   text-align: center;
   margin: 1em auto;
 }
+
+.button-div {
+  display: flex;
+}
+
+.button-div button {
+  flex: 1;
+  margin-left: .5em;
+}

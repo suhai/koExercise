@@ -39,7 +39,7 @@
     		<div class="col-md-3">
     			<input data-bind="value: taskInputDeadline" type="date" id="deadline" class="form-control">
     		</div>
-    		<div class="col-md-3">
+    		<div class="col-md-3 button-div">
     			<button data-bind="click: addTask, enable: taskInputName, visible: !updatableTask()" class="btn btn-primary">Add</button>
     			<button data-bind="click: updateTask, enable: taskInputName, visible: updatableTask" class="btn btn-primary">Update</button>
     			<button data-bind="click: editSelectedTask, enable: editableTask" class="btn btn-info">Edit</button>
@@ -85,9 +85,9 @@
           </select>
     		</div>
     		<div class="col-md-3">
-    			<input data-bind="value: hobbyInputFrequency" type="number" id="frequency" class="form-control">
+    			<input data-bind="value: hobbyInputFrequency" type="number" id="frequency" class="form-control" placeholder="Frequency">
     		</div>
-    		<div class="col-md-3">
+    		<div class="col-md-3 button-div">
     			<button data-bind="click: addHobby, enable: hobbyInputName, visible: !updatableHobby()" class="btn btn-primary">Add</button>
     			<button data-bind="click: updateHobby, enable: hobbyInputName,visible: updatableHobby" class="btn btn-primary">Update</button>
     			<button data-bind="click: editSelectedHobby, enable: editableHobby" class="btn btn-info">Edit</button>
