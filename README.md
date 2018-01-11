@@ -70,3 +70,4 @@ The app should now be live at http://localhost:8080/
 
 ## Tools
 This was built with knockout.js, bootstrap css, jquery, underscore.js, and run on a simple express server and a mongodb database.
+Note that the purpose of this is for me to understand the knockout.js. As a result I focused on functionality and not the appearance / css.
