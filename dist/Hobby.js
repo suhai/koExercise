@@ -99,7 +99,7 @@ class HobbyViewModel {
 			});
     });
 
-		this.hobbys.removeAll(this.selectedHobbies());
+		this.hobbies.removeAll(this.selectedHobbies());
 		this.selectedHobbies.removeAll();
 	}
 }

@@ -47,10 +47,24 @@ In a separate terminal window run the mongodb server with:
 $ mongod
 ```
 Keep the terminal window with the mongodb running and open a new window to continue working from.
+To see the list of databases available on your machine, run:
+```js
+$ show dbs
+```
+
+If there is a need to use a specific database, run:
+```js
+$ use [db_name]
+```
+
+If there is a need to destroy the database you're currently using, run:
+```js
+$ db.dropDatabase();
+```
 
 Fire up the app in the new terminal window with:
 ```js
-$ node app
+$ node myServer
 ```
 The app should now be live at http://localhost:8080/
 
