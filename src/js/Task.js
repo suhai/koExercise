@@ -8,9 +8,9 @@ class TaskViewModel {
     this.taskInputCategory = ko.observable();
     this.taskInputDeadline = ko.observable();
     this.selectedTasks = ko.observableArray();
-    this.updatable = ko.observable(false);
-    this.updateId = ko.observable();
-    this.categories = ko.observableArray([
+    this.updatableTask = ko.observable(false);
+    this.updateTaskId = ko.observable();
+    this.taskCategories = ko.observableArray([
       'JAMON',
       'HTML',
       'CSS',
@@ -22,26 +22,26 @@ class TaskViewModel {
     ]);
   }
 
-	editable() {
+	editableTask() {
     return ko.computed(() => (this.selectedTasks().length > 0));
   }
 
 	addTask() {
-		const name = $('#name').val();
-		const category = $('#category').val();
+		const taskName = $('#taskName').val();
+		const taskCategory = $('#taskCategory').val();
 		const deadline = $('#deadline').val();
 
 		this.tasks.push({
-			name,
-			category,
+			taskName,
+			taskCategory,
 			deadline
 		});
 
 		$.ajax({
 			url: 'http://localhost:8080/tasks',
 			data: JSON.stringify({
-				"name": name,
-				"category": category,
+				"taskName": taskName,
+				"taskCategory": taskCategory,
 				"deadline": deadline
 			}),
 			type: "POST",
@@ -52,23 +52,23 @@ class TaskViewModel {
 	}
 
 	updateTask() {
-		const id = this.updateId;
-		const name = $('#name').val();
-		const category = $('#category').val();
+		const id = this.updateTaskId;
+		const taskName = $('#taskName').val();
+		const taskCategory = $('#taskCategory').val();
 		const deadline = $('#deadline').val();
 
 		this.tasks.remove(item => (item._id == id));
 		this.tasks.push({
-			name,
-			category,
+			taskName,
+			taskCategory,
 			deadline
 		});
 
 		$.ajax({
 			url: `http://localhost:8080/tasks/${id}`,
 			data: JSON.stringify({
-				"name": name,
-				"category": category,
+				"taskName": taskName,
+				"taskCategory": taskCategory,
 				"deadline": deadline
 			}),
 			type: "PUT",
@@ -78,18 +78,18 @@ class TaskViewModel {
 		});
 	}
 
-	editSelected() {
-    this.updateId = this.selectedTasks()[0]._id;
+	editSelectedTask() {
+    this.updateTaskId = this.selectedTasks()[0]._id;
     const currTask = this.selectedTasks()[0];
-    const { name, category, deadline } = currTask;
+    const { taskName, taskCategory, deadline } = currTask;
 
-		this.updatable(true);
-		this.taskInputName(name);
-		this.taskInputCategory(category);
+		this.updatableTask(true);
+		this.taskInputName(taskName);
+		this.taskInputCategory(taskCategory);
 		this.taskInputDeadline(deadline);
 	}
 
-	deleteSelected() {
+	deleteSelectedTask() {
 		$.each(this.selectedTasks(), (index, value) => {
 			const id = this.selectedTasks()[index]._id;
 			$.ajax({
@@ -105,5 +105,3 @@ class TaskViewModel {
 		this.selectedTasks.removeAll();
 	}
 }
-
-export default TaskViewModel;
