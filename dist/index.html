@@ -44,35 +44,6 @@
       <br>
       <br>
 
-      <h2>RESERVATION</h2>
-      <div class="container" id="reservation">
-        <h5 class="reservation"><span class="tcost">Current Total: </span><span data-bind="visible: totalSurcharge() > 0, text: `$ ${totalSurcharge().toFixed(2)}`" class="tvalue"></span></h5>
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Passenger Name</th>
-                <th>Meal</th>
-                <th>Surcharge</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody data-bind="foreach: seats">
-              <tr>
-                <td><input data-bind="value: name" /></td>
-                <td><select data-bind="options: $root.availableMeals, value: meal, optionsText: 'mealName'"></select></td>
-                <td data-bind="text: formattedPrice"></td>
-                <td><a href="#" data-bind="click: $root.removeSeat" >Remove</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <button data-bind="click: addSeat" class="btn btn-success">Reserve a Seat</button>
-      </div> <!-- end of container -->
-      <hr>
-      <br>
-      <br>
-
       <h2>TASKS</h2>
       <div class="container" id="tasks">
         <div class="row">
@@ -176,7 +147,6 @@
   <!-- My goal is to eventually bundle all the js files togther as bundle.js -->
   <!-- <script src="bundle.js"></script> -->
   <script src="Intro.js"></script>
-  <script src="Reservation.js" ></script>
   <script src="Task.js"></script>
   <script src="Hobby.js"></script>
   <script src="app.js"></script>
