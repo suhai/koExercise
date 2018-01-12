@@ -26,116 +26,122 @@
       </div>
     </nav>
 
-    <h2>INTRO</h2>
-    <div class="container" id="intro">
-    	<div class="row">
-        <p>First Name: <strong data-bind="text: firstName"></strong></p>
-        <p>Last Name: <strong data-bind="text: lastName"></strong></p>
-        <p>First Name: <input data-bind="value: firstName" /></p>
-        <p>Last Name: <input data-bind="value: lastName" /></p>
-        <p>Full Name: <strong data-bind="text: fullName"></strong></p>
+    <main>
+      <h2>INTRO</h2>
+      <div class="container" id="intro">
+        <div class="row">
+          <p>First Name: <strong data-bind="text: firstName"></strong></p>
+          <p>Last Name: <strong data-bind="text: lastName"></strong></p>
+          <p>First Name: <input data-bind="value: firstName" /></p>
+          <p>Last Name: <input data-bind="value: lastName" /></p>
+          <p>Full Name: <strong data-bind="text: fullName"></strong></p>
 
-        <button data-bind="click: capitalizeLastName" class="btn btn-success">Go caps</button>
-      </div> <!-- end of row -->
-    </div> <!-- end of container -->
-    <hr>
-    <br>
-    <br>
-
-    <h2>TASKS</h2>
-    <div class="container" id="tasks">
-    	<div class="row">
-    		<div class="col-md-3">
-    			<input data-bind="value: taskInputName, valueUpdate: 'keypress'" type="text" id="taskName" class="form-control" placeholder="Enter Task">
-    		</div>
-    		<div class="col-md-3">
-    			<select data-bind="value: taskInputCategory, options: taskCategories, optionsCaption: 'Select Category'" id="taskCategory" class="form-control">
-    			</select>
-    		</div>
-    		<div class="col-md-3">
-    			<input data-bind="value: taskInputDeadline" type="date" id="deadline" class="form-control">
-    		</div>
-    		<div class="col-md-3 button-div">
-    			<button data-bind="click: addTask, enable: taskInputName, visible: !updatableTask()" class="btn btn-primary">Add</button>
-    			<button data-bind="click: updateTask, enable: taskInputName, visible: updatableTask" class="btn btn-primary">Update</button>
-    			<button data-bind="click: editSelectedTask, enable: editableTask" class="btn btn-info">Edit</button>
-    			<button data-bind="click: deleteSelectedTask, enable: editableTask" class="btn btn-danger">Delete</button>
-    		</div>
-    	</div> <!-- end of row -->
+          <button data-bind="click: capitalizeLastName" class="btn btn-success">Go caps</button>
+        </div> <!-- end of row -->
+      </div> <!-- end of container -->
+      <hr>
+      <br>
       <br>
 
-      <div class="row">
-      	<div class="col-md-12">
-      		<table class="table table-striped">
-      			<thead>
-      				<tr>
-      					<th></th>
-      					<th>Name</th>
-      					<th>Category</th>
-      					<th>Deadline</th>
-      				</tr>
-      			</thead>
-      			<tbody data-bind="foreach: tasks">
-      				<tr>
-      					<td><input data-bind="value: $data, checked: $parent.selectedTasks" type="checkbox"></td>
-      					<td data-bind="text: taskName"></td>
-      					<td data-bind="text: taskCategory"></td>
-      					<td data-bind="text: deadline"></td>
-      				</tr>
-      			</tbody>
-      		</table>
-      	</div>
-      </div> <!-- end of row -->
-    </div> <!-- end of container -->
-    <hr>
-    <br>
-    <br>
+      <h2>TASKS</h2>
+      <div class="container" id="tasks">
+        <div class="row">
+          <div class="col-md-3">
+            <input data-bind="value: taskInputName, valueUpdate: 'keypress'" type="text" id="taskName" class="form-control" placeholder="Enter Task">
+          </div>
+          <div class="col-md-3">
+            <select data-bind="value: taskInputCategory, options: taskCategories, optionsCaption: 'Select Category'" id="taskCategory" class="form-control">
+            </select>
+          </div>
+          <div class="col-md-3">
+            <input data-bind="value: taskInputDeadline" type="date" id="deadline" class="form-control">
+          </div>
+          <div class="col-md-3 button-div">
+            <button data-bind="click: addTask, enable: taskInputName, visible: !updatableTask()" class="btn btn-primary">Add</button>
+            <button data-bind="click: updateTask, enable: taskInputName, visible: updatableTask" class="btn btn-primary">Update</button>
+            <button data-bind="click: editSelectedTask, enable: editableTask" class="btn btn-info">Edit</button>
+            <button data-bind="click: deleteSelectedTask, enable: editableTask" class="btn btn-danger">Delete</button>
+          </div>
+        </div> <!-- end of row -->
+        <br>
 
-    <h2>HOBBIES</h2>
-    <div class="container" id="hobbies">
-    	<div class="row">
-    		<div class="col-md-3">
-    			<input data-bind="value: hobbyInputName, valueUpdate: 'keypress'" type="text" id="hobbyName" class="form-control" placeholder="Enter Hobby">
-    		</div>
-    		<div class="col-md-3">
-          <select data-bind="value: hobbyInputCategory, options: hobbyCategories, optionsCaption: 'Select Category'" id="hobbyCategory" class="form-control">
-          </select>
-    		</div>
-    		<div class="col-md-3">
-    			<input data-bind="value: hobbyInputFrequency" type="number" id="frequency" class="form-control" placeholder="Frequency">
-    		</div>
-    		<div class="col-md-3 button-div">
-    			<button data-bind="click: addHobby, enable: hobbyInputName, visible: !updatableHobby()" class="btn btn-primary">Add</button>
-    			<button data-bind="click: updateHobby, enable: hobbyInputName,visible: updatableHobby" class="btn btn-primary">Update</button>
-    			<button data-bind="click: editSelectedHobby, enable: editableHobby" class="btn btn-info">Edit</button>
-    			<button data-bind="click: deleteSelectedHobby, enable: editableHobby" class="btn btn-danger">Delete</button>
-    		</div>
-    	</div> <!-- end of row -->
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Deadline</th>
+                </tr>
+              </thead>
+              <tbody data-bind="foreach: tasks">
+                <tr>
+                  <td><input data-bind="value: $data, checked: $parent.selectedTasks" type="checkbox"></td>
+                  <td data-bind="text: taskName"></td>
+                  <td data-bind="text: taskCategory"></td>
+                  <td data-bind="text: deadline"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> <!-- end of row -->
+      </div> <!-- end of container -->
+      <hr>
+      <br>
       <br>
 
-      <div class="row">
-      	<div class="col-md-12">
-      		<table class="table table-striped">
-      			<thead>
-      				<tr>
-      					<th></th>
-      					<th>Name</th>
-      					<th>Category</th>
-      					<th>Frequency</th>
-      				</tr>
-      			</thead>
-      			<tbody data-bind="foreach: hobbies">
-      				<tr>
-      					<td><input data-bind="value: $data, checked: $parent.selectedHobbies" type="checkbox"></td>
-      					<td data-bind="text: hobbyName"></td>
-      					<td data-bind="text: hobbyCategory"></td>
-      					<td data-bind="text: frequency"></td>
-      				</tr>
-      			</tbody>
-      		</table>
-      	</div>
-      </div> <!-- end of row -->
-    </div> <!-- end of container -->
+      <h2>HOBBIES</h2>
+      <div class="container" id="hobbies">
+        <div class="row">
+          <div class="col-md-3">
+            <input data-bind="value: hobbyInputName, valueUpdate: 'keypress'" type="text" id="hobbyName" class="form-control" placeholder="Enter Hobby">
+          </div>
+          <div class="col-md-3">
+            <select data-bind="value: hobbyInputCategory, options: hobbyCategories, optionsCaption: 'Select Category'" id="hobbyCategory" class="form-control">
+            </select>
+          </div>
+          <div class="col-md-3">
+            <input data-bind="value: hobbyInputFrequency" type="number" id="frequency" class="form-control" placeholder="Frequency">
+          </div>
+          <div class="col-md-3 button-div">
+            <button data-bind="click: addHobby, enable: hobbyInputName, visible: !updatableHobby()" class="btn btn-primary">Add</button>
+            <button data-bind="click: updateHobby, enable: hobbyInputName,visible: updatableHobby" class="btn btn-primary">Update</button>
+            <button data-bind="click: editSelectedHobby, enable: editableHobby" class="btn btn-info">Edit</button>
+            <button data-bind="click: deleteSelectedHobby, enable: editableHobby" class="btn btn-danger">Delete</button>
+          </div>
+        </div> <!-- end of row -->
+        <br>
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody data-bind="foreach: hobbies">
+                <tr>
+                  <td><input data-bind="value: $data, checked: $parent.selectedHobbies" type="checkbox"></td>
+                  <td data-bind="text: hobbyName"></td>
+                  <td data-bind="text: hobbyCategory"></td>
+                  <td data-bind="text: frequency"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> <!-- end of row -->
+      </div> <!-- end of container -->
+    </main>
+
+    <div class="footer">
+      <p>koExercise ©</p>
+    </div>
   </body>
   <!-- My goal is to eventually bundle all the js files togther as bundle.js -->
   <!-- <script src="bundle.js"></script> -->
