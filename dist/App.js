@@ -4,11 +4,13 @@
  */
 let taskViewModel;
 let hobbyViewModel;
-let introViewModel;
 
 $(document).ready(function() {
   const introViewModel = new IntroViewModel('suhai', 'Yehuza');
   ko.applyBindings(introViewModel, document.getElementById("intro"));
+
+  const reservationViewModel = new ReservationViewModel();
+  ko.applyBindings(reservationViewModel, document.getElementById("reservation"));
 
   if ($.isEmptyObject(taskViewModel)) {
     const taskViewModel = new TaskViewModel();

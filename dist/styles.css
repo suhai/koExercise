@@ -20,6 +20,44 @@ h2 {
   margin-left: .5em;
 }
 
+/* TABLE */
+table {
+  width: 100%;
+  margin: 1em auto;
+}
+
+.reservation {
+  margin-bottom: 2.5em !important;
+}
+
+tr {
+  width: 100%;
+  display: flex;
+}
+
+tr th, tr td {
+  flex: 1;
+  margin: .5em auto;
+}
+
+h5 .tcost {
+  float: left;
+  color: #3851e0;
+  font-weight: bold;
+}
+
+h5 .tvalue {
+  float: right;
+  color: red;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: none;
+  color: hotpink;
+  font-weight: bold;
+}
+
 
 /* FOOTER */
 .footer {

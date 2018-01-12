@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -36,8 +37,37 @@
           <p>Last Name: <input data-bind="value: lastName" /></p>
           <p>Full Name: <strong data-bind="text: fullName"></strong></p>
 
-          <button data-bind="click: capitalizeLastName" class="btn btn-success">Go caps</button>
+          <button data-bind="click: capitalizeLastName" class="btn btn-success">Go CAPS</button>
         </div> <!-- end of row -->
+      </div> <!-- end of container -->
+      <hr>
+      <br>
+      <br>
+
+      <h2>RESERVATION</h2>
+      <div class="container" id="reservation">
+        <h5 class="reservation"><span class="tcost">Current Total: </span><span data-bind="visible: totalSurcharge() > 0, text: `$ ${totalSurcharge().toFixed(2)}`" class="tvalue"></span></h5>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Passenger Name</th>
+                <th>Meal</th>
+                <th>Surcharge</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody data-bind="foreach: seats">
+              <tr>
+                <td><input data-bind="value: name" /></td>
+                <td><select data-bind="options: $root.availableMeals, value: meal, optionsText: 'mealName'"></select></td>
+                <td data-bind="text: formattedPrice"></td>
+                <td><a href="#" data-bind="click: $root.removeSeat" >Remove</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button data-bind="click: addSeat" class="btn btn-success">Reserve a Seat</button>
       </div> <!-- end of container -->
       <hr>
       <br>
@@ -145,8 +175,9 @@
   </body>
   <!-- My goal is to eventually bundle all the js files togther as bundle.js -->
   <!-- <script src="bundle.js"></script> -->
-  <script src="Intro.js" ></script>
-  <script src="Task.js" ></script>
-  <script src="Hobby.js" ></script>
-  <script src="app.js" ></script>
+  <script src="Intro.js"></script>
+  <script src="Reservation.js" ></script>
+  <script src="Task.js"></script>
+  <script src="Hobby.js"></script>
+  <script src="app.js"></script>
 </html>
