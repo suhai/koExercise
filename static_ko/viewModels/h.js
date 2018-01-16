@@ -1,6 +1,5 @@
 
 (function () {
-  // Private function
   function getColumnsForScaffolding(data) {
     if ((typeof data.length !== 'number') || data.length === 0) {
       return [];
@@ -120,16 +119,16 @@ class PagedGridModel {
 }
 
 const initialData = [
-  { name: 'Well-Travelled Kitten', sales: 352, price: 75.95 },
-  { name: 'Speedy Coyote', sales: 89, price: 190.00 },
-  { name: 'Furious Lizard', sales: 152, price: 25.00 },
-  { name: 'Indifferent Monkey', sales: 1, price: 99.95 },
-  { name: 'Brooding Dragon', sales: 0, price: 6350 },
-  { name: 'Ingenious Tadpole', sales: 39450, price: 0.35 },
-  { name: 'Optimistic Snail', sales: 420, price: 1.50 }
+  { name: 'Elephant', sales: 352, price: 75.95 },
+  { name: 'Coyote', sales: 89, price: 190.00 },
+  { name: 'Giraffe', sales: 152, price: 25.00 },
+  { name: 'Babboon', sales: 10, price: 99.95 },
+  { name: 'Impala', sales: 20, price: 6350 },
+  { name: 'Porcupine', sales: 39450, price: 0.35 },
+  { name: 'Octopus', sales: 420, price: 1.50 }
 ];
 
 $(document).ready(function() {
-  const xViewModel = new PagedGridModel(initialData);
-  ko.applyBindings(xViewModel, document.getElementById('hh'));
+  const viewModel = new PagedGridModel(initialData);
+  ko.applyBindings(viewModel, document.getElementById('hh'));
 });

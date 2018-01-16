@@ -39,7 +39,7 @@
       </div>
       <br>
       <form data-bind="submit:addItem">
-        Add More Items: <input type="text" data-bind='value:itemToAdd, valueUpdate: "afterkeydown"' />
+        Add More Items: <input type="text" data-bind='value: itemToAdd, valueUpdate: "afterkeydown"' />
         <button type="submit" data-bind="enable: itemToAdd().length > 0">Add</button>
       </form>
     </div> <!-- end of container -->

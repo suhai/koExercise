@@ -1,16 +1,32 @@
-class XViewModel {
-  constructor() {
-    this.stringValue = ko.observable('Hello');
-    this.passwordValue = ko.observable('mypass');
-    this.booleanValue = ko.observable(true);
-    this.optionValues = ['Alpha', 'Beta', 'Gamma'];
-    this.selectedOptionValue = ko.observable('Gamma');
-    this.multipleSelectedOptionValues = ko.observable(['Alpha']);
-    this.radioSelectedOptionValue = ko.observable('Beta');
+class AppViewModel {
+  constructor(type) {
+    this.type = type;
+    this.data = ko.observableArray([
+      { name: 'Alfred', position: 'Butler', location: 'London' },
+      { name: 'Bruce', position: 'Chairman', location: 'New York' }
+    ]);
+  }
+
+  flipData() {
+    this.starttime = new Date().getTime();
+    let data = this.data();
+    for (var i = 0; i < 999; i++) {
+      this.data([]);
+      this.data(data.reverse());
+    }
+  }
+
+  timing() {
+    return this.starttime ? new Date().getTime() - this.starttime : 0;
   }
 }
 
 $(document).ready(function() {
-  const xViewModel = new XViewModel();
-  ko.applyBindings(xViewModel, document.getElementById('gg'));
+  ko.options.deferUpdates = true;
+  const vmDeferred = new AppViewModel('deferred');
+
+  ko.options.deferUpdates = false;
+  const vmStandard = new AppViewModel('standard');
+
+  ko.applyBindings([vmStandard, vmDeferred], document.getElementById('gg'));
 });

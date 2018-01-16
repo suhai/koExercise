@@ -2,12 +2,12 @@ class BetterListViewModel {
   constructor() {
     this.itemToAdd = ko.observable('');
     this.allItems = ko.observableArray(['Oranges', 'Mangos', 'Apples']);
-    this.selectedItems = ko.observableArray(["Ham"]);
+    this.selectedItems = ko.observableArray([]);
   }
 
   addItem() {
     let addable = this.itemToAdd();
-    if ((addable != '') && (this.allItems.indexOf(addable) < 0)) {
+    if (addable != '' && this.allItems.indexOf(addable) < 0) {
       this.allItems.push(addable);
       this.itemToAdd('');
     }

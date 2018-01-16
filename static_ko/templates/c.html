@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="../viewModels/c.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../styles.css">
@@ -28,23 +28,22 @@
 
   <main>
     <div class="container" id="cc">
-      <h3 data-bind="text: question"></h3>
-      <p>Please distribute <b data-bind="text: pointsBudget"></b> points between the following options.</p>
+      <h3>All tasks (<span data-bind="text: tasks().length"> </span>)</h3>
+      <ul data-bind="foreach: tasks">
+        <li>
+          <label>
+            <input type="checkbox" data-bind="checked: done" />
+            <span data-bind="text: title"> </span>
+          </label>
+        </li>
+      </ul>
 
-      <table>
-        <thead><tr><th>Option</th><th>Importance</th></tr></thead>
-        <tbody data-bind="foreach: answers">
-          <tr>
-            <td data-bind="text: answerText"></td>
-            <td data-bind="starRating: points"></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3 data-bind="fadeVisible: pointsUsed() > pointsBudget">You've used too many points! Please remove some.</h3>
-      <p>You've got <b data-bind="text: pointsBudget - pointsUsed()"></b> points left to use.</p>
-      <button data-bind="jqButton: { enable: pointsUsed() <= pointsBudget }, click: save">Finished</button>
+      <h3>Done tasks (<span data-bind="text: doneTasks().length"> </span>)</h3>
+      <ul data-bind="foreach: doneTasks">
+        <li data-bind="text: title"></li>
+      </ul>
     </div> <!-- end of container -->
+    <hr>
   </main>
 </body>
 </html>

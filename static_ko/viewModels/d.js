@@ -1,56 +1,55 @@
-// class XViewModel {
-//   constructor() {
-
-//   }
-
-//   someMethod() {
-
-//   }
-// }
-
-// $(document).ready(function() {
-//   const xViewModel = new XViewModel();
-//   ko.applyBindings(xViewModel, document.getElementById('dd'));
-// });
-
-
-function Task(data) {
-  this.title = ko.observable(data.title);
-  this.isDone = ko.observable(data.isDone);
+class Person {
+  constructor(name, children) {
+    this.name = ko.observable(name);
+    this.children = ko.observableArray(children || []);
+  }
 }
 
-function TaskListViewModel() {
-  // Data
-  var self = this;
-  self.tasks = ko.observableArray([]);
-  self.newTaskText = ko.observable();
-  self.incompleteTasks = ko.computed(function() {
-      return ko.utils.arrayFilter(self.tasks(), function(task) { return !task.isDone() && !task._destroy; });
-  });
+class PeopleModel {
+  constructor() {
+    this.people = ko.observableArray([
+      new Person("Bob", [
+        new Person("Jan"),
+        new Person("Don", [
+          new Person("Ted"),
+          new Person("Ben", [
+            new Person("Joe", [
+              new Person("Ali"),
+              new Person("Ken")
+            ])
+          ]),
+          new Person("Doug")
+        ])
+      ]),
+      new Person("Ann", [
+        new Person("Eve"),
+        new Person("Hal")
+      ])
+    ]);
 
-  // Operations
-  self.addTask = function() {
-      self.tasks.push(new Task({ title: this.newTaskText() }));
-      self.newTaskText("");
-  };
-  self.removeTask = function(task) { self.tasks.destroy(task); };
-  self.save = function() {
-      $.ajax("/tasks", {
-          data: ko.toJSON({ tasks: self.tasks }),
-          type: "post", contentType: "application/json",
-          success: function(result) { alert(result); }
-      });
-  };
-
-  // Load initial state from server, convert it to Task instances, then populate self.tasks
-  $.getJSON("/tasks", function(allData) {
-      var mappedTasks = $.map(allData, function(item) { return new Task(item); });
-      self.tasks(mappedTasks);
-  });
+    this.addChild = (name, parentArray) => {
+      parentArray.push(new Person(name));
+    };
+  }
 }
 
-// ko.applyBindings(new TaskListViewModel());
 $(document).ready(function() {
-  const taskListViewModel = new TaskListViewModel();
-  ko.applyBindings(taskListViewModel, document.getElementById('dd'));
+  const xViewModel = new PeopleModel();
+  ko.applyBindings(xViewModel, document.getElementById('dd'));
+  $("#people").on("click", ".remove", function() {
+    const context = ko.contextFor(this),
+      parentArray = context.$parent.people || context.$parent.children;
+    parentArray.remove(context.$data);
+
+    return false;
+  });
+
+  $("#people").on("click", ".add", function() {
+    const context = ko.contextFor(this),
+      childName = context.$data.name() + " child",
+      parentArray = context.$data.people || context.$data.children;
+    context.$root.addChild(childName, parentArray);
+
+    return false;
+  });
 });

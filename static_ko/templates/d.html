@@ -28,23 +28,17 @@
 
   <main>
     <div class="container" id="dd">
-      <h3>Tasks</h3>
-      <ul data-bind="foreach: tasks, visible: tasks().length > 0">
-        <li>
-          <input type="checkbox" data-bind="checked: isDone" />
-          <input data-bind="value: title, disable: isDone" />
-          <a href="#" data-bind="click: $parent.removeTask">Delete</a>
-        </li>
+      <ul id="people" data-bind='template: { name: "personTmpl", foreach: people }'>
       </ul>
-      <form data-bind="submit: addTask">
-        TO DOs: <input data-bind="value: newTaskText" placeholder="Add To Do" />
-        <button type="submit">Add</button>
-        <br>
-        <br>
-      </form>
-      <b data-bind="text: incompleteTasks().length">&nbsp;</b> Incomplete Tasks
-      <span data-bind="visible: incompleteTasks().length == 0"> - It's beer time!</span>
-      <button data-bind="click: save">Save</button>
+
+      <script id="personTmpl" type="text/html">
+        <li>
+          <a class="remove" href="#"> delete </a>
+          <span data-bind='text: name'></span>
+          <a class="add" href="#"> add child </a>
+          <ul data-bind='template: { name: "personTmpl", foreach: children }'></ul>
+        </li>
+      </script>
     </div> <!-- end of container -->
     <hr>
   </main>

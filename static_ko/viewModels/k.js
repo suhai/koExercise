@@ -1,29 +1,26 @@
-var GiftModel = function(gifts) {
-  var self = this;
-  self.gifts = ko.observableArray(gifts);
+ko.extenders.required = function(target, overrideMessage) {
+  target.hasError = ko.observable();
+  target.validationMessage = ko.observable();
 
-  self.addGift = function() {
-      self.gifts.push({
-          name: "",
-          price: ""
-      });
-  };
+  function validate(newValue) {
+    target.hasError(newValue ? false : true);
+    target.validationMessage(newValue ? "" : overrideMessage || "This field is required");
+  }
 
-  self.removeGift = function(gift) {
-      self.gifts.remove(gift);
-  };
-
-  self.save = function(form) {
-    alert("Could now transmit to server: " + ko.utils.stringifyJson(self.gifts));
-  };
+  validate(target());
+  target.subscribe(validate);
+  return target;
 };
 
-const viewModel = new GiftModel([
-  { name: "Tall Hat", price: "39.95"},
-  { name: "Long Cloak", price: "120.00"}
-]);
-// Activate jQuery Validation
-$("form").validate({ submitHandler: viewModel.save });
+class AppViewModel {
+  constructor(first, last){
+    this.firstName = ko.observable(first).extend({ required: 'Please enter a first name', logChange: 'first name' });
+    this.lastName = ko.observable(last).extend({ required: '' });
+  }
+}
+
+// ko.applyBindings(new AppViewModel("Bob","Smith"));
 $(document).ready(function() {
-  ko.applyBindings(viewModel, document.getElementById('kk'));
+  const xViewModel = new AppViewModel('John', 'Bull');
+  ko.applyBindings(xViewModel, document.getElementById('kk'));
 });

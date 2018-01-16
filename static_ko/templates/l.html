@@ -10,13 +10,13 @@
   <script src="../viewModels/l.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../styles.css">
-  <title>Template Z</title>
+  <title>Template L</title>
 </head>
 <body>
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">HERE COMES Z</a>
+        <a class="navbar-brand" href="#">HERE COMES L</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
@@ -28,50 +28,15 @@
 
   <main>
     <div class="container" id="ll">
-      <div class='liveExample'>
-
-        <table width='100%'>
-            <thead>
-                <tr>
-                    <th width='25%'>Category</th>
-                    <th width='25%'>Product</th>
-                    <th class='price' width='15%'>Price</th>
-                    <th class='quantity' width='10%'>Quantity</th>
-                    <th class='price' width='15%'>Subtotal</th>
-                    <th width='10%'> </th>
-                </tr>
-            </thead>
-            <tbody data-bind='foreach: lines'>
-                <tr>
-                    <td>
-                        <select data-bind='options: sampleProductCategories, optionsText: "name", optionsCaption: "Select...", value: category'> </select>
-                    </td>
-                    <td data-bind="with: category">
-                        <select data-bind='options: products, optionsText: "name", optionsCaption: "Select...", value: $parent.product'> </select>
-                    </td>
-                    <td class='price' data-bind='with: product'>
-                        <span data-bind='text: formatCurrency(price)'> </span>
-                    </td>
-                    <td class='quantity'>
-                        <input data-bind='visible: product, value: quantity, valueUpdate: "afterkeydown"' />
-                    </td>
-                    <td class='price'>
-                        <span data-bind='visible: product, text: formatCurrency(subtotal())' > </span>
-                    </td>
-                    <td>
-                        <a href='#' data-bind='click: $parent.removeLine'>Remove</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p class='grandTotal'>
-            Total value: <span data-bind='text: formatCurrency(grandTotal())'> </span>
-        </p>
-        <button data-bind='click: addLine'>Add product</button>
-        <button data-bind='click: save'>Submit order</button>
-
-      </div>
+      <ul data-bind="foreach: products">
+        <li class="product">
+          <strong data-bind="text: name"></strong>
+          <like-widget params="value: userRating"></like-widget>
+        </li>
+      </ul>
+      <button data-bind="click: addProduct">Add a product</button>
     </div> <!-- end of container -->
+    <hr>
   </main>
 </body>
 </html>

@@ -2,7 +2,6 @@ class SeatReservation {
   constructor(name, initialMeal) {
     this.name = name;
     this.meal = ko.observable(initialMeal);
-
     this.formattedPrice = ko.computed(() => {
       const price = this.meal().price;
       return price ? `$${price.toFixed(2)}` : 'Free';
@@ -19,14 +18,13 @@ class ReservationViewModel {
       { mealName: 'Premium', price: 34.95 },
       { mealName: 'Ultimate', price: 290.50 }
     ];
-    /** Editable data */
+
     this.seats = ko.observableArray([
       new SeatReservation('Tom', this.availableMeals[0]),
       new SeatReservation('Anna', this.availableMeals[1]),
       new SeatReservation('John', this.availableMeals[2]),
     ]);
 
-    /** Computed data */
     this.totalCost = ko.computed(() => {
       return this.seats().map(seat => seat.meal().price)
       .reduce((acc, currVal) => acc + currVal);

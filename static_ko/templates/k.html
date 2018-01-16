@@ -10,13 +10,13 @@
   <script src="../viewModels/k.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../styles.css">
-  <title>Template Z</title>
+  <title>Template K</title>
 </head>
 <body>
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">HERE COMES Z</a>
+        <a class="navbar-brand" href="#">HERE COMES K</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
@@ -28,33 +28,18 @@
 
   <main>
     <div class="container" id="kk">
-      <div class='liveExample'>
-
-        <form action='/someServerSideHandler'>
-            <p>You have asked for <span data-bind='text: gifts().length'>&nbsp;</span> gift(s)</p>
-            <table data-bind='visible: gifts().length > 0'>
-                <thead>
-                    <tr>
-                        <th>Gift name</th>
-                        <th>Price</th>
-                        <th />
-                    </tr>
-                </thead>
-                <tbody data-bind='foreach: gifts'>
-                    <tr>
-                        <td><input class='required' data-bind='value: name, uniqueName: true' /></td>
-                        <td><input class='required number' data-bind='value: price, uniqueName: true' /></td>
-                        <td><a href='#' data-bind='click: $root.removeGift'>Delete</a></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <button data-bind='click: addGift'>Add Gift</button>
-            <button data-bind='enable: gifts().length > 0' type='submit'>Submit</button>
-        </form>
-
-    </div>
+      <h4>Required Fields</h4>
+      <br>
+      <p data-bind="css: { error: firstName.hasError }">
+        <input data-bind='value: firstName, valueUpdate: "afterkeydown"' />
+        <span data-bind='visible: firstName.hasError, text: firstName.validationMessage'> </span>
+      </p>
+      <p data-bind="css: { error: lastName.hasError }">
+        <input data-bind='value: lastName, valueUpdate: "afterkeydown"' />
+        <span data-bind='visible: lastName.hasError, text: lastName.validationMessage'> </span>
+      </p>
     </div> <!-- end of container -->
+    <hr>
   </main>
 </body>
 </html>

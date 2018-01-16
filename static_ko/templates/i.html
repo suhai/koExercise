@@ -43,9 +43,7 @@
         <label><input type='radio' name="type" value='gasgiant' data-bind='checked: typeToShow' />Gas giants</label>
       </p>
 
-      <div data-bind='template: { foreach: planetsToShow,
-                                  beforeRemove: hidePlanetElement,
-                                  afterAdd: showPlanetElement }'>
+      <div data-bind='template: { foreach: planetsToShow, beforeRemove: hidePlanetElement, afterAdd: showPlanetElement }'>
         <div data-bind='text: name'></div>
       </div>
       <br>
