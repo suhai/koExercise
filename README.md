@@ -64,7 +64,7 @@ $ db.dropDatabase();
 
 Fire up the app in the new terminal window with:
 ```js
-$ node myServer
+$ node server
 ```
 The app should now be live at http://localhost:8080/
 
