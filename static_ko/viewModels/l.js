@@ -38,5 +38,5 @@ class MyViewModel {
 
 $(document).ready(function() {
   const xViewModel = new MyViewModel();
-  ko.applyBindings(xViewModel, document.getElementById('mm'));
+  ko.applyBindings(xViewModel, document.getElementById('ll'));
 });
