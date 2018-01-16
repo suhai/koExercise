@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="../viewModels/e.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Template E</title>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">HERE COMES E</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container" id="ee">
+      <div>I have been clicked <span data-bind='text: numberOfClicks'>&nbsp;</span> times so far.</div>
+      <br>
+      <button data-bind='click: registerClick, disable: hasClickedTooManyTimes'>Click me</button>
+      <br>
+      <br>
+      <div data-bind='visible: hasClickedTooManyTimes'>
+        Now That's too many clicks!. No More For You.
+        <button data-bind='click: resetClicks'>Reset clicks</button>
+      </div>
+    </div> <!-- end of container -->
+    <hr>
+  </main>
+</body>
+</html>
